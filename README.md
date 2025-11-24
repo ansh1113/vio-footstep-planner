@@ -1,5 +1,32 @@
 # VIO + Footstep Planner Fusion for GPS-Denied Navigation
 
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![OpenCV](https://img.shields.io/badge/OpenCV-4.5+-green.svg)](https://opencv.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/ansh1113/vio-footstep-planner/graphs/commit-activity)
+
+**Visual-Inertial Odometry + Footstep Planning for autonomous quadruped navigation in GPS-denied environments.**
+
+## 🎯 Key Results
+
+- ✅ **98% Success Rate** - Successfully navigates complex obstacle courses
+- ✅ **60% Error Reduction** - Drift correction reduces localization error vs standalone VIO
+- ✅ **Real-time Performance** - Full pipeline runs at 10 Hz
+- ✅ **GPS-Denied Operation** - Fully autonomous in indoor/underground environments
+
+## 📋 Table of Contents
+
+- [Overview](#overview)
+- [System Architecture](#system-architecture)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Performance Analysis](#performance-analysis)
+- [Citation](#citation)
+
+---
+
+
 An integrated Visual-Inertial Odometry (VIO) and footstep planning system that enables autonomous quadruped navigation in GPS-denied environments with 98% task success rate and 60% reduction in localization error through drift correction strategies.
 
 ## Overview
