@@ -1,0 +1,72 @@
+# VIO Configuration for VINS-Fusion
+
+# Camera calibration
+camera:
+  model_type: PINHOLE
+  camera_name: realsense
+  image_width: 640
+  image_height: 480
+  
+  # Intrinsics [fx, fy, cx, cy]
+  intrinsics: [615.0, 615.0, 320.0, 240.0]
+  
+  # Distortion coefficients [k1, k2, p1, p2, k3]
+  distortion: [0.0, 0.0, 0.0, 0.0, 0.0]
+  
+  # Distortion model: radtan, equidistant
+  distortion_model: radtan
+
+# IMU parameters
+imu:
+  # Noise characteristics (units: SI)
+  acc_n: 0.2          # Accelerometer noise density (m/s^2/sqrt(Hz))
+  gyr_n: 0.02         # Gyroscope noise density (rad/s/sqrt(Hz))
+  acc_w: 0.002        # Accelerometer random walk (m/s^3/sqrt(Hz))
+  gyr_w: 0.0002       # Gyroscope random walk (rad/s^2/sqrt(Hz))
+  
+  # Extrinsics: transformation from camera to IMU (T_imu_cam)
+  T_cam_imu:
+    - [1.0, 0.0, 0.0, 0.05]
+    - [0.0, 1.0, 0.0, 0.0]
+    - [0.0, 0.0, 1.0, 0.02]
+    - [0.0, 0.0, 0.0, 1.0]
+  
+  # Gravity magnitude (m/s^2)
+  gravity_magnitude: 9.81
+
+# Feature tracker parameters
+feature_tracker:
+  max_cnt: 150              # Maximum features per image
+  min_dist: 20              # Minimum pixel distance between features
+  freq: 10                  # Publishing frequency (Hz)
+  F_threshold: 1.0          # RANSAC threshold for fundamental matrix
+  show_track: false         # Show feature tracks
+  equalize: true            # Histogram equalization
+  fisheye: false            # Fisheye camera
+
+# VIO estimator parameters
+estimator:
+  max_solver_time: 0.04     # Maximum solver time (seconds)
+  max_num_iterations: 8     # Maximum optimization iterations
+  keyframe_parallax: 10.0   # Parallax threshold for keyframe (pixels)
+  
+  # Sliding window size
+  window_size: 10
+  
+  # Optimization parameters
+  estimate_extrinsic: 1     # 0: fixed, 1: optimize, 2: online calibration
+  estimate_td: 0            # Time offset calibration
+  
+  # Loop closure
+  loop_closure: 1           # Enable loop closure detection
+  fast_relocalization: 0    # Fast relocalization
+  
+# Output parameters
+output:
+  # Output path for results
+  output_path: "./output/"
+  
+  # Save results
+  save_trajectory: true
+  save_keyframe_pose: true
+  save_keyframe_point: false
