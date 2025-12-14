@@ -3,6 +3,9 @@
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![OpenCV](https://img.shields.io/badge/OpenCV-4.5+-green.svg)](https://opencv.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Tests](https://github.com/ansh1113/vio-footstep-planner/actions/workflows/test.yml/badge.svg)](https://github.com/ansh1113/vio-footstep-planner/actions/workflows/test.yml)
+[![Lint](https://github.com/ansh1113/vio-footstep-planner/actions/workflows/lint.yml/badge.svg)](https://github.com/ansh1113/vio-footstep-planner/actions/workflows/lint.yml)
+[![Build](https://github.com/ansh1113/vio-footstep-planner/actions/workflows/build.yml/badge.svg)](https://github.com/ansh1113/vio-footstep-planner/actions/workflows/build.yml)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/ansh1113/vio-footstep-planner/graphs/commit-activity)
 
 **Visual-Inertial Odometry + Footstep Planning for autonomous quadruped navigation in GPS-denied environments.**
@@ -113,7 +116,29 @@ This project combines VINS-Fusion for visual-inertial localization with a custom
 
 ## Installation
 
-### Prerequisites
+### Quick Start (Clone and Run)
+
+For a quick start without ROS2 dependencies:
+
+```bash
+# Clone the repository
+git clone https://github.com/ansh1113/vio-footstep-planner.git
+cd vio-footstep-planner
+
+# Install the package
+pip install -e .
+
+# Run tests to verify installation
+pytest tests/
+
+# Try the smoke test
+make smoke-test
+
+# Run a quick demo
+python scripts/demo_quick.py
+```
+
+### Prerequisites (for full ROS2 integration)
 
 ```bash
 # ROS2 Humble
@@ -632,6 +657,55 @@ kalibr_calibrate_imu_camera \
 - [ ] Multi-floor navigation with elevation mapping
 - [ ] Semantic SLAM for object-level understanding
 - [ ] Integration with GPS for outdoor transitions
+
+## Development
+
+### Setting Up Development Environment
+
+```bash
+# Install with development dependencies
+pip install -e ".[dev]"
+
+# Install pre-commit hooks
+pip install pre-commit
+pre-commit install
+
+# Run all checks
+make all
+```
+
+### Common Development Tasks
+
+```bash
+# Run tests
+make test
+
+# Run tests with coverage
+make test-cov
+
+# Format code
+make format
+
+# Lint code
+make lint
+
+# Type check
+make type-check
+
+# Clean build artifacts
+make clean
+
+# Build distribution packages
+make build
+```
+
+### Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) and [DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md) for detailed information on:
+- Code style guidelines
+- Testing practices
+- Pull request process
+- Development workflow
 
 ## Citation
 
