@@ -1,11 +1,27 @@
 # VIO + Footstep Planner Fusion for GPS-Denied Navigation
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![OpenCV](https://img.shields.io/badge/OpenCV-4.5+-green.svg)](https://opencv.org/)
+[![OpenCV](https://img.shields.io/badge/OpenCV-4.8.1.78+-green.svg)](https://opencv.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/ansh1113/vio-footstep-planner/graphs/commit-activity)
 
 **Visual-Inertial Odometry + Footstep Planning for autonomous quadruped navigation in GPS-denied environments.**
+
+## 🚀 Quick Start
+
+```bash
+# Clone the repository
+git clone https://github.com/ansh1113/vio-footstep-planner.git
+cd vio-footstep-planner
+
+# One-command setup
+./setup.sh --dev
+
+# Run tests
+make test
+```
+
+See [QUICKSTART.md](QUICKSTART.md) for detailed instructions.
 
 ## 🎯 Key Results
 
@@ -16,6 +32,7 @@
 
 ## 📋 Table of Contents
 
+- [Quick Start](#-quick-start)
 - [Overview](#overview)
 - [System Architecture](#system-architecture)
 - [Features](#features)
@@ -113,7 +130,26 @@ This project combines VINS-Fusion for visual-inertial localization with a custom
 
 ## Installation
 
-### Prerequisites
+### Quick Installation (Recommended)
+
+For a quick, standalone Python installation:
+
+```bash
+# Clone the repository
+git clone https://github.com/ansh1113/vio-footstep-planner.git
+cd vio-footstep-planner
+
+# Run setup script
+./setup.sh --dev
+```
+
+See [QUICKSTART.md](QUICKSTART.md) for more details.
+
+### Advanced Installation
+
+For ROS2 integration and full system deployment:
+
+#### Prerequisites
 
 ```bash
 # ROS2 Humble
@@ -129,7 +165,7 @@ sudo apt install libceres-dev
 sudo apt install libopencv-dev
 ```
 
-### VINS-Fusion Installation
+#### VINS-Fusion Installation
 
 ```bash
 cd ~/ros2_ws/src
@@ -144,11 +180,11 @@ colcon build --packages-select vins
 source install/setup.bash
 ```
 
-### This Package Installation
+#### This Package Installation (ROS2)
 
 ```bash
 cd ~/ros2_ws/src
-git clone https://github.com/yourusername/vio-footstep-planner.git
+git clone https://github.com/ansh1113/vio-footstep-planner.git
 
 cd ~/ros2_ws
 rosdep install --from-paths src --ignore-src -r -y
