@@ -1,7 +1,7 @@
 # VIO + Footstep Planner Fusion for GPS-Denied Navigation
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![OpenCV](https://img.shields.io/badge/OpenCV-4.5+-green.svg)](https://opencv.org/)
+[![OpenCV](https://img.shields.io/badge/OpenCV-4.8.1.78+-green.svg)](https://opencv.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/ansh1113/vio-footstep-planner/graphs/commit-activity)
 

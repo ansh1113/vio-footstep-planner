@@ -20,12 +20,27 @@ if [ "$1" == "--dev" ]; then
     echo "✓ Installing with development dependencies"
 fi
 
+# Check if in virtual environment
+if [ -z "$VIRTUAL_ENV" ]; then
+    echo ""
+    echo "⚠️  Not running in a virtual environment."
+    echo "   It's recommended to use a virtual environment:"
+    echo "   python3 -m venv venv && source venv/bin/activate"
+    echo ""
+    read -p "Continue anyway? (y/N) " -n 1 -r
+    echo
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        echo "Setup cancelled."
+        exit 1
+    fi
+fi
+
 echo ""
 echo "Installing package..."
 if [ "$DEV_MODE" = true ]; then
-    pip install -e ".[dev]"
+    pip install --upgrade-strategy eager -e ".[dev]"
 else
-    pip install -e .
+    pip install --upgrade-strategy eager -e .
 fi
 
 echo ""

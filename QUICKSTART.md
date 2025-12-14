@@ -116,7 +116,13 @@ pip install -e ".[dev]"
 Install all required dependencies:
 
 ```bash
-pip install -r requirements.txt
+pip install -e ".[dev]"
+```
+
+For production use without dev dependencies:
+
+```bash
+pip install -e .
 ```
 
 ## Next Steps
