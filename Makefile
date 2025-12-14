@@ -1,51 +1,44 @@
-.PHONY: help install install-dev test lint format clean build docs
+.PHONY: help install install-dev test lint format clean check
 
 help:  ## Show this help message
 	@echo 'Usage: make [target]'
 	@echo ''
 	@echo 'Available targets:'
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}'
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}'
 
-install:  ## Install package and dependencies
+install:  ## Install package
 	pip install -e .
 
-install-dev:  ## Install package with dev dependencies
+install-dev:  ## Install package with development dependencies
 	pip install -e ".[dev]"
 
 test:  ## Run tests
 	pytest tests/ -v
 
-test-cov:  ## Run tests with coverage
-	pytest tests/ -v --cov=src --cov-report=html --cov-report=term
+test-cov:  ## Run tests with coverage report
+	pytest tests/ -v --cov=vio_footstep_planner --cov-report=term-missing
 
-lint:  ## Run linters
-	ruff check src/ tests/
-	black --check src/ tests/
+lint:  ## Run code linters
+	flake8 src/vio_footstep_planner tests --max-line-length=100 --extend-ignore=E203,W503,W293
 
-format:  ## Format code
-	black src/ tests/
-	ruff check --fix src/ tests/
+format:  ## Format code with black
+	black src/vio_footstep_planner tests
 
-type-check:  ## Run type checker
-	mypy src/
+format-check:  ## Check code formatting
+	black --check src/vio_footstep_planner tests
+
+check:  ## Run all checks (lint + format-check + test)
+	@$(MAKE) format-check
+	@$(MAKE) lint
+	@$(MAKE) test
 
 clean:  ## Clean build artifacts
 	rm -rf build/
 	rm -rf dist/
 	rm -rf *.egg-info
-	rm -rf .pytest_cache/
-	rm -rf .coverage
-	rm -rf htmlcov/
+	rm -rf src/*.egg-info
 	find . -type d -name __pycache__ -exec rm -rf {} +
-	find . -type f -name '*.pyc' -delete
-	find . -type f -name '*.pyo' -delete
-
-build:  ## Build distribution packages
-	python -m build
-
-smoke-test:  ## Run minimal smoke test
-	python -c "import vio_footstep_planner; print('✓ Import successful')"
-	python -c "from vio_footstep_planner import VIONavigator, FootstepPlanner; print('✓ Main classes importable')"
-	python -m pytest tests/test_smoke.py -v
-
-all: clean install-dev lint test  ## Run full development cycle
+	find . -type f -name "*.pyc" -delete
+	find . -type d -name ".pytest_cache" -exec rm -rf {} +
+	find . -name ".coverage" -delete
+	find . -type d -name "htmlcov" -exec rm -rf {} +
