@@ -3,6 +3,7 @@
 import numpy as np
 import heapq
 from typing import List, Tuple, Optional, Callable
+from ..utils import normalize_angle
 
 
 class Node:
@@ -194,9 +195,8 @@ class AStarPlanner:
         # Rotation cost (if theta is in state)
         rotation_cost = 0.0
         if len(state1) > 2 and len(state2) > 2:
-            dtheta = abs(state2[2] - state1[2])
-            # Normalize to [-pi, pi]
-            dtheta = np.arctan2(np.sin(dtheta), np.cos(dtheta))
+            dtheta = state2[2] - state1[2]
+            dtheta = normalize_angle(dtheta)  # Use utility function
             rotation_cost = 0.5 * abs(dtheta)
         
         return distance + rotation_cost

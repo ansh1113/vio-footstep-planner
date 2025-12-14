@@ -4,6 +4,7 @@ import numpy as np
 from typing import List, Optional, Dict
 from .a_star import AStarPlanner
 from .reachability import ReachabilityChecker
+from ..utils import normalize_angle
 
 
 class FootstepPlanner:
@@ -159,7 +160,7 @@ class FootstepPlanner:
         
         # Rotation cost
         dtheta = abs(state2[2] - state1[2])
-        dtheta = np.arctan2(np.sin(dtheta), np.cos(dtheta))  # Normalize to [-pi, pi]
+        dtheta = normalize_angle(dtheta)  # Use utility function
         rotation_cost = self.rotation_weight * abs(dtheta)
         
         # Terrain cost (if obstacle map provided)
@@ -184,7 +185,7 @@ class FootstepPlanner:
         
         # Angular difference to goal
         dtheta = abs(state[2] - goal[2])
-        dtheta = np.arctan2(np.sin(dtheta), np.cos(dtheta))
+        dtheta = normalize_angle(dtheta)  # Use utility function
         
         return distance + 0.5 * abs(dtheta)
     

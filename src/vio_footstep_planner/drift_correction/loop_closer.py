@@ -28,16 +28,8 @@ class LoopClosureDetector:
         # ORB detector for feature extraction
         self.orb = cv2.ORB_create(nfeatures=500)
         
-        # FLANN matcher for feature matching
-        FLANN_INDEX_LSH = 6
-        index_params = dict(
-            algorithm=FLANN_INDEX_LSH,
-            table_number=6,
-            key_size=12,
-            multi_probe_level=1
-        )
-        search_params = dict(checks=50)
-        self.matcher = cv2.FlannBasedMatcher(index_params, search_params)
+        # BFMatcher is more reliable for ORB binary descriptors
+        self.matcher = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=False)
     
     def add_keyframe(self, image: np.ndarray, pose: np.ndarray) -> int:
         """Add a new keyframe to the database.
@@ -138,7 +130,7 @@ class LoopClosureDetector:
             return []
         
         try:
-            # FLANN matching with LSH
+            # Use BFMatcher with ratio test
             matches = self.matcher.knnMatch(desc1, desc2, k=2)
             
             # Lowe's ratio test
@@ -146,14 +138,13 @@ class LoopClosureDetector:
             for match_pair in matches:
                 if len(match_pair) == 2:
                     m, n = match_pair
-                    if m.distance < 0.7 * n.distance:
+                    if m.distance < 0.75 * n.distance:  # Stricter ratio for ORB
                         good_matches.append(m)
             
             return good_matches
         except:
-            # Fallback to brute force matching
-            bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
-            matches = bf.match(desc1, desc2)
+            # Fallback to simple matching
+            matches = self.matcher.match(desc1, desc2)
             return sorted(matches, key=lambda x: x.distance)[:100]
     
     def _geometric_verification(self, kp1: List, kp2: List, 

@@ -127,6 +127,12 @@ class VIOEstimator:
     def _preintegrate_imu(self, measurements: List[Dict]) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
         """Pre-integrate IMU measurements.
         
+        NOTE: This is a simplified IMU pre-integration for demonstration.
+        For production use, consider:
+        - Proper manifold-based integration (e.g., using Lie algebra)
+        - Transforming accelerations to world frame before integration
+        - Using a full VIO library like VINS-Fusion or ORB-SLAM3
+        
         Args:
             measurements: List of IMU measurements
             
