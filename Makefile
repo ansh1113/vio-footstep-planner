@@ -40,5 +40,5 @@ clean:  ## Clean build artifacts
 	find . -type d -name __pycache__ -exec rm -rf {} +
 	find . -type f -name "*.pyc" -delete
 	find . -type d -name ".pytest_cache" -exec rm -rf {} +
-	find . -type d -name ".coverage" -exec rm -rf {} +
+	find . -name ".coverage" -delete
 	find . -type d -name "htmlcov" -exec rm -rf {} +
