@@ -544,6 +544,8 @@ def main():
     print("2. Run this script in each directory")
     print("3. Install dependencies: pip install -r requirements.txt")
     print("4. Test the implementations")
+    return 0
 
 if __name__ == "__main__":
-    main()
+    import sys
+    sys.exit(main())

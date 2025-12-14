@@ -1,4 +1,0 @@
-numpy>=1.21.0
-scipy>=1.7.0
-osqp>=0.6.0
-stable-baselines3>=1.6.0
