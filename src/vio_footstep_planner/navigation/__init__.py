@@ -1,3 +1,3 @@
 from .navigator import VIONavigator
 
-__all__ = ['VIONavigator']
+__all__ = ["VIONavigator"]
