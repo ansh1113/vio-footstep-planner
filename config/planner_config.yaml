@@ -1,0 +1,89 @@
+# Footstep Planner Configuration
+
+# Robot parameters
+robot:
+  model: spot  # spot, anymal, etc.
+  
+  # Physical dimensions (meters)
+  body_length: 0.7
+  body_width: 0.5
+  body_height: 0.3
+  
+  # Leg parameters
+  leg_length: 0.6
+  leg_reach_forward: 0.5
+  leg_reach_lateral: 0.35
+  leg_reach_backward: 0.3
+
+# Step constraints
+footstep_planner:
+  # Kinematic constraints
+  max_step_length: 0.4      # Maximum forward step (meters)
+  max_step_width: 0.3       # Maximum lateral step (meters)
+  max_step_height: 0.2      # Maximum vertical step (meters)
+  max_step_yaw: 0.5         # Maximum rotation per step (radians)
+  
+  # Planning parameters
+  planning_horizon: 3.0     # Planning horizon (meters)
+  planning_resolution: 0.05 # Grid resolution (meters)
+  replan_frequency: 1.0     # Replanning frequency (Hz)
+  goal_tolerance: 0.2       # Goal tolerance (meters)
+  max_planning_time: 1.0    # Maximum planning time (seconds)
+  
+  # A* search parameters
+  max_iterations: 5000      # Maximum search iterations
+  
+  # Cost weights
+  distance_weight: 1.0      # Weight for distance cost
+  rotation_weight: 0.5      # Weight for rotation cost
+  terrain_weight: 2.0       # Weight for terrain difficulty
+  smoothness_weight: 0.3    # Weight for path smoothness
+  
+  # Safety parameters
+  obstacle_inflation: 0.2   # Obstacle inflation radius (meters)
+  min_clearance: 0.15       # Minimum clearance from obstacles (meters)
+  
+  # Stability parameters
+  com_margin: 0.05          # Center of mass margin (meters)
+  min_support_area: 0.01    # Minimum support polygon area (m^2)
+
+# Drift correction parameters
+drift_correction:
+  enable_loop_closure: true
+  loop_closure_threshold: 0.7       # Similarity threshold [0-1]
+  min_loop_interval: 30             # Minimum frames between loop closures
+  pose_graph_optimization_freq: 10  # Optimize every N poses
+  
+  # Loop closure detection
+  orb_features: 500                 # Number of ORB features
+  matching_threshold: 30            # Minimum feature matches
+  ransac_threshold: 1.0             # RANSAC inlier threshold (pixels)
+  
+  # Pose graph optimization
+  max_optimization_iterations: 100
+  convergence_threshold: 1e-6
+
+# Navigation parameters
+navigation:
+  # Global planner
+  use_global_planner: true
+  global_planner_type: "a_star"  # a_star, rrt, etc.
+  
+  # Local replanning
+  enable_local_replanning: true
+  replan_distance_threshold: 1.0  # Replan if deviate by this much (m)
+  
+  # Obstacle avoidance
+  enable_obstacle_avoidance: true
+  obstacle_detection_range: 2.0   # Range for obstacle detection (m)
+  
+  # Recovery behaviors
+  enable_recovery: true
+  max_recovery_attempts: 3
+
+# Visualization
+visualization:
+  publish_footsteps: true
+  publish_path: true
+  publish_occupancy_grid: true
+  marker_scale: 0.05
