@@ -94,6 +94,10 @@ def main():
     navigator = VIONavigator(drift_correction=True)
     navigator.start()
     
+    # Reduce optimization frequency for faster demo
+    if navigator.drift_corrector is not None:
+        navigator.drift_corrector.optimization_frequency = 50  # Optimize less frequently
+    
     print("\n2. Initializing Footstep Planner...")
     planner_config = {
         'max_step_length': 0.4,
