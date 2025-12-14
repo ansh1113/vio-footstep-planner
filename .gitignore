@@ -27,6 +27,8 @@ build/
 .pytest_cache/
 .coverage
 htmlcov/
+.mypy_cache/
+.tox/
 
 # Data and Models
 *.bag
